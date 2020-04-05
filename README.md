@@ -25,3 +25,7 @@ To Build:
 
 # Reference(s)
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
+
+# Author
+Yogeshwaran
+Laxmi Priya
