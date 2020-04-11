@@ -21,7 +21,8 @@ void ImplParticle::SetPosition(const Position * iPosition)
 
 void ImplParticle::GetPosition(Position *& oPosition) const
 {
-	oPosition = _pPosition;
+	if(_pPosition)
+		oPosition = _pPosition;
 }
 
 void ImplParticle::SetDensity(const double& iDensity)
