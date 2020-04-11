@@ -19,7 +19,7 @@ To Build:
 ----------------
 1.  Start Microsoft Visual Studio and select **File** \> **Open** \> **CreatingInterfaceGitHub**.
 2.  Go to the directory named for the Geometry, and double-click the Geometry.sln file.
-3.  Press F7 or use **Build** \> **Build Solution** to build the solution.
+3.  Press F5 or use **Build** \> **Build Solution** to build the solution.
 
     The executable will be built in the default **\\bin** or **\\bin\\Debug** directory.
 
