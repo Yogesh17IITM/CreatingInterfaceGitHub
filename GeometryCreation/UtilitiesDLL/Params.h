@@ -1,11 +1,7 @@
 #pragma once
 
 // DLL Exports
-#ifdef UTILITIESDLL_EXPORTS
-#  define UTILITIESDLLEXPORT __declspec(dllexport)
-#else
-#  define UTILITIESDLLEXPORT __declspec(dllimport)
-#endif
+#include "UtilitiesDLLExport.h"
 
 // Struct Definitions
 struct UTILITIESDLLEXPORT GeometricParams2D

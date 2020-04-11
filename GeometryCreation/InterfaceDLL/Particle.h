@@ -4,11 +4,7 @@
 using namespace std;
 
 // DLL Exports
-#ifdef INTERFACEDLL_EXPORTS
-#  define INTERFACEDLLEXPORT __declspec(dllexport)
-#else
-#  define INTERFACEDLLEXPORT __declspec(dllimport)
-#endif
+#include "InterfaceDLLExport.h"
 
 // Forward declarations
 class Position;

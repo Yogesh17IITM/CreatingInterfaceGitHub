@@ -47,5 +47,8 @@
     <ClInclude Include="ImplCalculatePosition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImplementationDLLExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

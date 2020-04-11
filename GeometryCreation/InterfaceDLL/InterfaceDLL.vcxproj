@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CalculatePosition.h" />
+    <ClInclude Include="InterfaceDLLExport.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Position.h" />
   </ItemGroup>
