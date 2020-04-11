@@ -19,7 +19,7 @@ void GetDataFor2DGeometry(GeometricParams2D& oGeometricParams2D)
 	case GeometricParams2D::GEOMETRIC_TYPE::Rectangle:
 		oGeometricParams2D.Rec.Length = GetParam("Length");
 		oGeometricParams2D.Rec.Height = GetParam("Height");
-		oGeometricParams2D.Rec.CentreX = GetParam("Centre X");
+		oGeometricParams2D.Rec.CentreX = GetParam("Centre X");	// Note: Centre X, Y used for finding four corner points of rectangle
 		oGeometricParams2D.Rec.CentreY = GetParam("Centre Y");
 		break;
 	case GeometricParams2D::GEOMETRIC_TYPE::Triangle:

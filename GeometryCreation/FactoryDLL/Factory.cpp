@@ -49,6 +49,10 @@ bool FACTORYDLLEXPORT CreateMultipleParticleInstances(vector<Particle*>& oListOf
 		oListOfParticles.resize(iNoOfParticles);
 		oReturnVal = true;
 	}
+	else
+	{
+		oReturnVal = false;		// Instance already created
+	}
 
 	if (oReturnVal)
 	{

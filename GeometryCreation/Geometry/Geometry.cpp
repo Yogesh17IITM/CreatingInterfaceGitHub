@@ -7,8 +7,8 @@
 #include "Particle.h"
 #include "CalculatePosition.h"
 
-// Include dependencies (User-defined)
-#include "Factory.h"
+// Include dependencies
+#include "Factory.h"	
 #include "Utilities.h"
 #include "Params.h"
 
@@ -56,6 +56,7 @@ int main()
 	// TODO: Create Boundary Particles using ParticleCreation algo.
 
 	// TODO: Print Particle info to a file and view it
+	WriteToFile(ListOfAirParticles);
 
 	// TODO: Include error library to diplay error codes/ messages
 	return 0;
