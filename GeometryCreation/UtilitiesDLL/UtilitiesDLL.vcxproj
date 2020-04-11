@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Params.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="UtilitiesDLLExport.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

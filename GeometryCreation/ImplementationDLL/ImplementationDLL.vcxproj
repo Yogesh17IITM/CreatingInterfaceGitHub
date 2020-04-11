@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="ImplAirParticle.h" />
     <ClInclude Include="ImplCalculatePosition.h" />
+    <ClInclude Include="ImplementationDLLExport.h" />
     <ClInclude Include="ImplParticle.h" />
     <ClInclude Include="ImplPosition.h" />
     <ClInclude Include="ImplWaterParticle.h" />

@@ -29,5 +29,8 @@
     <ClInclude Include="Params.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UtilitiesDLLExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

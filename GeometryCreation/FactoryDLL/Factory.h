@@ -5,11 +5,7 @@
 #include "Particle.h"
 
 // DLL Exports
-#ifdef FACTORYDLL_EXPORTS
-#  define FACTORYDLLEXPORT __declspec(dllexport)
-#else
-#  define FACTORYDLLEXPORT __declspec(dllimport)
-#endif
+#include "FactoryDLLExport.h"
 
  enum class FACTORYDLLEXPORT INTERFACE_ID
 {
