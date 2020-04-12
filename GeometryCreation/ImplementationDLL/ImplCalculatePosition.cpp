@@ -4,29 +4,47 @@
 #include "ImplPosition.h"
 #include "Particle.h"
 
-bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfParticles, const GridParams iGridParams, const GeometricParams2D iGeometricParams2D)
+bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfParticles, const GridParams & iGridParams, const GeometricParams2D & iGeometricParams2D, const Position* ipStartPosition)
 {
-	Particle* pCurrentParticle = NULL;
+	bool oRc = false;
+
+	double Start_X = 0.0;
+	double Start_Y = 0.0;
+		
+	if (ipStartPosition)
+	{
+		Start_X = ipStartPosition->GetX() + (iGridParams.dx);	// Extend only in X-Direction		
+	}
 
 	int iCurrParticle = 0;
 	for (int iIdx = 0; iIdx < iGridParams.NX; iIdx++)
 	{
 		for (int jIdx = 0; jIdx < iGridParams.NY; jIdx++)
 		{
-			Position* pPosOfCurrParticle = new ImplPosition();
-
-			// Assuming cartesian Coordinate system [2D]
-			pPosOfCurrParticle->SetX(iIdx * iGridParams.dx * iGeometricParams2D.Rec.Length);	// Set 'X' Coordinate
-			pPosOfCurrParticle->SetY(jIdx * iGridParams.dy * iGeometricParams2D.Rec.Height);	// Set 'Y' Coordinate
-
 			// Get current particle pointer and update its position
+			Particle* pCurrentParticle = NULL;
 			pCurrentParticle = oListOfParticles[iCurrParticle];
-			pCurrentParticle->SetPosition(pPosOfCurrParticle);	// TODO: Copy obj if required
-			iCurrParticle++;
-			//delete pPosOfCurrParticle;  // TODO: Check if life cycle manages propertly
-										  // Addref and release must be added.
+
+			if (pCurrentParticle)
+			{
+				Position* pPosOfCurrParticle = new ImplPosition();	// TODO: Instantiate using FactoryDLL
+				if (pPosOfCurrParticle)
+				{
+					// Assuming cartesian Coordinate system [2D]
+					pPosOfCurrParticle->SetX(Start_X + (iIdx * iGridParams.dx * iGeometricParams2D.Rec.Length));	// Set 'X' Coordinate
+					pPosOfCurrParticle->SetY(Start_Y + (jIdx * iGridParams.dy * iGeometricParams2D.Rec.Height));	// Set 'Y' Coordinate 
+				}
+				pCurrentParticle->SetPosition(pPosOfCurrParticle);	// TODO: Copy obj if required. Manage lifecycle of pPosOfCurrParticle.
+				iCurrParticle++;
+			}			
 		}
 	}
 
-	return false;
+	int nTotalParticles = (iGridParams.NX * iGridParams.NY); 
+	if (oListOfParticles.size() == nTotalParticles)
+	{
+		oRc = true;
+	}
+
+	return oRc;
 }
