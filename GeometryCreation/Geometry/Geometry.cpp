@@ -56,7 +56,7 @@ int main()
 	// TODO: Create Boundary Particles using ParticleCreation algo.
 
 	// TODO: Print Particle info to a file and view it
-	WriteToFile(ListOfAirParticles);
+	WriteToFile(ListOfAirParticles, "InitialStateOfParticles");
 
 	// TODO: Include error library to diplay error codes/ messages
 	return 0;

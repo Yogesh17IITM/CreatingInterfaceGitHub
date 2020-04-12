@@ -11,6 +11,11 @@
 // Include the 'Using' directives
 using namespace std;
 
+// Macro definitions
+#define PATHTOWRITE(Filename) "C:/Users/YOGESH/Documents/Output/"+(Filename)+".csv"
+
+/* FUNCTION DEFINITIONS */
+
 // TODO: Use template functions instead of specfic datatype in the below case
 double GetParam(string iParam)
 {
@@ -25,14 +30,12 @@ void DisplayMessage(string iStrMsg)
 	cout << iStrMsg << endl;
 }
 
-bool WriteToFile(const vector<Particle*>& iListOfParticles)
+bool WriteToFile(const vector<Particle*>& iListOfParticles, const string& iNameOfFile)
 {
 	bool oReturnVal = false;
-	ofstream file;
-
-	// TODO: Take the filename path as input and pass it here
-	file.open("C:/Users/YOGESH/Documents/Output/InitialStateOfParticles.csv");	
-
+	ofstream file;	
+		
+	file.open(PATHTOWRITE(iNameOfFile));	
 	if (file.is_open())
 	{
 		oReturnVal = true;	// File opened Successfully		
