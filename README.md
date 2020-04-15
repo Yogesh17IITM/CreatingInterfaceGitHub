@@ -27,5 +27,5 @@ To Build:
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
 
 # Author(s)
-1. Yogeshwaran
-2. Lakshmi Priya
+Yogeshwaran
+
