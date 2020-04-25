@@ -23,7 +23,10 @@ To Build:
 
     The executable will be built in the default **\\bin** or **\\bin\\Debug** directory.
 
+# Initial State:
 ![Density](Output/Density.jpg "Initial Condition Screenshot")
+A rectangular domain (or a tank) of size 2 x 1 meters containing a total of 1001 x 1001 particles.
+Particles are initially distinct into two different regimes representing air (on the left) and water (on the right) respectively.
 
 # Reference(s)
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
