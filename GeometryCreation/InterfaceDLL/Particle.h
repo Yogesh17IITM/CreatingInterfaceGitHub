@@ -6,12 +6,15 @@ using namespace std;
 // DLL Exports
 #include "InterfaceDLLExport.h"
 
+// Include headers
+#include "ImplMaster.h"
+
 // Forward declarations
 class Position;
 class GridParams;
 class GeometricParams2D;
 
-class INTERFACEDLLEXPORT Particle
+class INTERFACEDLLEXPORT Particle : public ImplMaster
 {
 public:
 	Particle();

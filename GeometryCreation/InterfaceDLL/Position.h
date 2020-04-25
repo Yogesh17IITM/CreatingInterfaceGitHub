@@ -3,7 +3,10 @@
 // DLL Exports
 #include "InterfaceDLLExport.h"
 
-class INTERFACEDLLEXPORT Position
+// Include headers
+#include "ImplMaster.h"
+
+class INTERFACEDLLEXPORT Position : public ImplMaster
 {	
 public:
 	Position();
