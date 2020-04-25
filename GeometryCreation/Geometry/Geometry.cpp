@@ -18,11 +18,11 @@ using namespace std;
 
 int main()
 {		
-	// Get Geometry details
+	// 1. Get Geometrical details
 	GeometricParams2D geoParam2D;	
 	GetDataFor2DGeometry(geoParam2D);
 		
-	// Get Grid Params
+	// 2. Get Grid Params
 	bool bRc = false;
 	GridParams gridParams;
 	if (geoParam2D.GeometricType == GeometricParams2D::GEOMETRIC_TYPE::Rectangle)
@@ -30,9 +30,9 @@ int main()
 		bRc = CalculateGridSize(gridParams, geoParam2D);
 	}
 	
-	// Create Particle instances
-	vector<Particle*> ListOfAirParticles;	// Air Particles
-	vector<Particle*> ListOfWaterParticles;	// Water Particles
+	// 3. Create Particle instances
+	vector<Particle*> ListOfAirParticles;	
+	vector<Particle*> ListOfWaterParticles;
 	int NAirParticles = 0;
 	int NWaterParticles = 0;
 	if (bRc)
@@ -40,22 +40,22 @@ int main()
 		NAirParticles = (gridParams.NX * gridParams.NY); // Total air particles
 		NWaterParticles = NAirParticles;				 // Total Water Particles (currently same as air particles)
 
-		// Create Air Particles		
+		// 3.1 Create Air Particles		
 		bRc = CreateMultipleParticleInstances(ListOfAirParticles, NAirParticles, INTERFACE_ID::IID_AirParticle);
 
-		// Create Water Particles
+		// 3.2 Create Water Particles
 		if (bRc)
 			bRc = CreateMultipleParticleInstances(ListOfWaterParticles, NWaterParticles, INTERFACE_ID::IID_WaterParticle);
 	}
 
-	// Calculate current position of particles	
+	// 4. Initial position of particles (at time, t = 0)
 	if (bRc && (NAirParticles == ListOfAirParticles.size() && (NWaterParticles == ListOfWaterParticles.size())))
 	{			
 		CalculatePosition* pCalcPosition = NULL;
 		bRc = CreateInstance((void**)&pCalcPosition, INTERFACE_ID::IID_CalculatePosition);
 		if (bRc && pCalcPosition)
 		{
-			// 1. For air particles
+			// 4.1: For air particles
 			bRc = pCalcPosition->CalculateCurrentPosition(ListOfAirParticles, gridParams, geoParam2D);
 
 			Position* pStartPosition = NULL;
@@ -63,15 +63,23 @@ int main()
 			{				
 				Particle* pLastParticle = NULL;
 				pLastParticle = ListOfAirParticles[ListOfAirParticles.size() - 1];
-				if (pLastParticle)									
-					pLastParticle->GetPosition(pStartPosition);							
+				if (pLastParticle)
+				{
+					pLastParticle->AddRef();
+					pLastParticle->GetPosition(pStartPosition);
+				}
+				pLastParticle->Release();
 			}
 
-			// 2. For water particles
+			// 4.2: For water particles
 			if (bRc && pStartPosition)
+			{
+				pStartPosition->AddRef();
 				bRc = pCalcPosition->CalculateCurrentPosition(ListOfWaterParticles, gridParams, geoParam2D, pStartPosition);
+			}
+			pStartPosition->Release();
 		}
-		delete pCalcPosition;
+		pCalcPosition->Release();
 	}
 	
 	// TODO: Function to Set properties
@@ -88,6 +96,9 @@ int main()
 	}
 
 	// TODO: Include error library to diplay error codes/ messages
+
+	// TODO: Release pointers after using it.	
+
 	return 0;
 }
 

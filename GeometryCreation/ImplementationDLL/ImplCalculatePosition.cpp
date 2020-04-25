@@ -27,16 +27,20 @@ bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfP
 
 			if (pCurrentParticle)
 			{
+				pCurrentParticle->AddRef();
 				Position* pPosOfCurrParticle = new ImplPosition();	// TODO: Instantiate using FactoryDLL
 				if (pPosOfCurrParticle)
 				{
 					// Assuming cartesian Coordinate system [2D]
 					pPosOfCurrParticle->SetX(Start_X + (iIdx * iGridParams.dx * iGeometricParams2D.Rec.Length));	// Set 'X' Coordinate
 					pPosOfCurrParticle->SetY(Start_Y + (jIdx * iGridParams.dy * iGeometricParams2D.Rec.Height));	// Set 'Y' Coordinate 
+					pCurrentParticle->SetPosition(pPosOfCurrParticle);	// TODO: Copy obj if required. Manage lifecycle of pPosOfCurrParticle.
+					pPosOfCurrParticle->AddRef();
 				}
-				pCurrentParticle->SetPosition(pPosOfCurrParticle);	// TODO: Copy obj if required. Manage lifecycle of pPosOfCurrParticle.
+				pPosOfCurrParticle->Release();	
 				iCurrParticle++;
-			}			
+			}
+			pCurrentParticle->Release();
 		}
 	}
 
