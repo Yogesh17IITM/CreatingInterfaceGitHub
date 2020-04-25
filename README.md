@@ -23,6 +23,8 @@ To Build:
 
     The executable will be built in the default **\\bin** or **\\bin\\Debug** directory.
 
+![Density](Output/Density.jpg "Initial Condition Screenshot")
+
 # Reference(s)
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
 
