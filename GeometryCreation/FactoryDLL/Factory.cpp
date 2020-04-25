@@ -34,8 +34,8 @@ bool CreateInstance(void** opp, const INTERFACE_ID iInterfaceID)
 			break;
 		}
 	
-		if (opp)		
-			oReturnVal = true;
+		if (opp)	
+			oReturnVal = true;		
 	}
 	return oReturnVal;
 }
@@ -59,11 +59,17 @@ bool FACTORYDLLEXPORT CreateMultipleParticleInstances(vector<Particle*>& oListOf
 		for (int iParticle = 0; iParticle < oListOfParticles.size(); iParticle++)
 		{
 			Particle* pParticle = NULL;
-			oReturnVal = CreateInstance((void**)&pParticle, iInterfaceID);
+			oReturnVal = CreateInstance((void**)&pParticle, iInterfaceID);			
 			if (oReturnVal)
+			{
 				oListOfParticles[iParticle] = pParticle;
+				pParticle->AddRef();		// Call AddRef() when a pointer is referenced.
+			}
 			else
+			{
 				break;
+			}
+			pParticle->Release();			// Call Release() when it scope ends.
 		}
 	}
 
