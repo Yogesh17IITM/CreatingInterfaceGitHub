@@ -58,7 +58,7 @@ int main()
 			// 4.1: For air particles
 			bRc = pCalcPosition->CalculateCurrentPosition(ListOfAirParticles, gridParams, geoParam2D);
 
-			Position* pStartPosition = NULL;
+			Position* pLastAirParticlePosition = NULL;
 			if (bRc)
 			{				
 				Particle* pLastParticle = NULL;
@@ -66,25 +66,34 @@ int main()
 				if (pLastParticle)
 				{
 					pLastParticle->AddRef();
-					pLastParticle->GetPosition(pStartPosition);
+					pLastParticle->GetPosition(pLastAirParticlePosition);					
 				}
 				pLastParticle->Release();
 			}
 
 			// 4.2: For water particles
-			if (bRc && pStartPosition)
+			if (bRc && pLastAirParticlePosition)
 			{
-				pStartPosition->AddRef();
-				bRc = pCalcPosition->CalculateCurrentPosition(ListOfWaterParticles, gridParams, geoParam2D, pStartPosition);
+				pLastAirParticlePosition->AddRef();
+
+				Position* pStartPosition = NULL;
+				bRc = CreateInstance((void**)&pStartPosition, INTERFACE_ID::IID_Position);
+				if (bRc && pStartPosition)
+				{
+					pStartPosition->SetX(pLastAirParticlePosition->GetX() + gridParams.dx);
+					pStartPosition->SetY(0.0);	// To extend only in X-Direction
+					bRc = pCalcPosition->CalculateCurrentPosition(ListOfWaterParticles, gridParams, geoParam2D, pStartPosition);
+				}
+				pStartPosition->Release();
 			}
-			pStartPosition->Release();
+			pLastAirParticlePosition->Release();
 		}
 		pCalcPosition->Release();
 	}
 	
-	// TODO: Function to Set properties
-	
 	// TODO: Create Boundary Particles using ParticleCreation algo.
+
+	// TODO: Function to Set properties	
 
 	// Writing Initial state of Particle(s) into .csv file (User can view it using "Paraview" application)
 	if (bRc)

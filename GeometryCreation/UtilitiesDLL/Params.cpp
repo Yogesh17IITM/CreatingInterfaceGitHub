@@ -6,8 +6,7 @@
 using namespace std;
 
 void GetDataFor2DGeometry(GeometricParams2D& oGeometricParams2D)
-{
-	// TODO: Define a template function in utilities and move the below code to there
+{	
 	int DomainType;
 	DisplayMessage("Specify Domain Type: 1 (for rectangle), 2 (for triangle) and 3 (for circle)");
 	cin >> DomainType;

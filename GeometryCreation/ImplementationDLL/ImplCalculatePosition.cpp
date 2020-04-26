@@ -13,7 +13,8 @@ bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfP
 		
 	if (ipStartPosition)
 	{
-		Start_X = ipStartPosition->GetX() + (iGridParams.dx);	// Extend only in X-Direction		
+		Start_X = ipStartPosition->GetX();	// To extend in X-Direction
+		Start_Y = ipStartPosition->GetY();	// To extend in Y-Direction
 	}
 
 	int iCurrParticle = 0;
