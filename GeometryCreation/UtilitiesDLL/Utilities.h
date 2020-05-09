@@ -7,6 +7,9 @@
 #include<string>
 #include<vector>
 
+// Dependencies
+#include "ImplMaster.h"
+
 // Using directives
 using namespace std;
 
@@ -38,3 +41,32 @@ UTILITIESDLLEXPORT void DisplayMessage(string iStrMsg);
 			 : true - if file successfully created
 			 : false - if unable to create file */
 UTILITIESDLLEXPORT bool WriteToFile(const vector<Particle*> & iListOfParticles, const string & iNameOfFile);
+
+/* CLASS DECLARATIONS */
+template<class T>
+class SmartPtr
+{
+	ImplMaster* _ptr;
+public:
+	explicit SmartPtr(ImplMaster* ip = NULL)
+	{
+		_ptr = ip;
+		if (_ptr)
+			_ptr->AddRef();
+	}
+	virtual ~SmartPtr()
+	{
+		if (NULL != _ptr)
+			_ptr->Release();			
+	}
+	SmartPtr& operator=(ImplMaster* ip)
+	{
+		this->_ptr = ip;
+		if (_ptr)
+			_ptr->AddRef();
+		return *this;
+	}
+	T& operator*() { return *_ptr; }
+	T* operator->() { return (T*)_ptr; }	
+	operator bool() const { return (_ptr) ? true : false; }
+};
