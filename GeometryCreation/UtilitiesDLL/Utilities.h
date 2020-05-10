@@ -32,7 +32,7 @@ UTILITIESDLLEXPORT double GetParam(string iParam);
 @return      : NA */
 UTILITIESDLLEXPORT void DisplayMessage(string iStrMsg);
 
-/* FUNCTION: DisplayMessage
+/* FUNCTION: WriteToFile
 @Description : Function to write data information to a file
 @in          : iListOfParticles - Contains list of Particle information 
 			 : iNameOfFile - Name of the output file
@@ -43,6 +43,12 @@ UTILITIESDLLEXPORT void DisplayMessage(string iStrMsg);
 UTILITIESDLLEXPORT bool WriteToFile(const vector<Particle*> & iListOfParticles, const string & iNameOfFile);
 
 /* CLASS DECLARATIONS */
+
+/* CLASS: SmartPtr
+@Description : Template class to automatically manage the lifecycle of pointer which is derived from ImplMaster.
+@in			 : Any pointer which is derived from ImplMaster
+@out		 : Pointer with AddRef() and releases automatically when it goes out of scope.
+@return      : depends on function defined in it */
 template<class T>
 class SmartPtr
 {
