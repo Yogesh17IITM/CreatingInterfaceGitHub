@@ -11,7 +11,7 @@ struct UTILITIESDLLEXPORT GeometricParams2D
 
 	union
 	{
-		struct Rectangle { double CentreX, CentreY, Length, Height; } Rec;
+		struct Rectangle { double Length, Height; } Rec;
 		struct Triangle { double CentreX, CentreY, Base, Height; } Tri;
 		struct Circle { double CentreX, CentreY, Radius; } Cir;
 	};	
