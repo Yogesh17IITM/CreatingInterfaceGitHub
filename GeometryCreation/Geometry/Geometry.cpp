@@ -1,3 +1,22 @@
+/*
+Objective:
+    To develop an API to create a geometry with given user inputs (Coordinates)
+
+Input: 
+    Coordinates/Points
+    Note: User may use the interface (Github: /WPF-Application)
+
+Output:
+    Points representing domain of interests
+
+Visualize:
+    User can input the given points to Paraview for visualization
+
+Author:
+    Yogeshwaran R
+*/
+
+
 // Std libraries
 #include<iostream>
 #include<string>
@@ -16,6 +35,7 @@
 // Using directives
 using namespace std;
 
+/* MAIN PROGRAM */
 int main()
 {
     // 1. Get Geometrical details
@@ -31,6 +51,7 @@ int main()
     }
 
     // 3. Create Particle instances
+#pragma region InstantiatingParticles
     vector<Particle*> ListOfAirParticles;
     vector<Particle*> ListOfWaterParticles;
     int NAirParticles = 0;
@@ -47,8 +68,10 @@ int main()
         if (bRc)
             bRc = CreateMultipleParticleInstances(ListOfWaterParticles, NWaterParticles, INTERFACE_ID::IID_WaterParticle);
     }
+#pragma endregion
 
     // 4. Initial position of particles (at time, t = 0)
+#pragma region InitialPosition
     if (bRc && (NAirParticles == ListOfAirParticles.size() && (NWaterParticles == ListOfWaterParticles.size())))
     {
         CalculatePosition* pCalcPosition = NULL;
@@ -92,12 +115,14 @@ int main()
         }
         pCalcPosition->Release();
     }
+#pragma endregion
 
     // TODO: Create Boundary Particles using ParticleCreation algo.
 
     // TODO: Function to Set properties	
 
     // Writing Initial state of Particle(s) into .csv file (User can view it using "Paraview" application)
+#pragma region WritingInitialStateToaFile
     if (bRc)
     {
         vector<Particle*> ListOfAllParticles;
@@ -105,6 +130,7 @@ int main()
         ListOfAllParticles.insert(ListOfAllParticles.end(), ListOfWaterParticles.begin(), ListOfWaterParticles.end());
         WriteToFile(ListOfAllParticles, "InitialStateOfParticles");
     }
+#pragma endregion
 
     // TODO: Include error library to diplay error codes/ messages
         

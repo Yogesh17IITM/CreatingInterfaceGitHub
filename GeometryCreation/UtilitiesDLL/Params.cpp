@@ -16,10 +16,10 @@ using namespace std;
 void GetDataFor2DGeometry(GeometricParams2D& oGeometricParams2D)
 {
     int DomainType = 1;	// Set Default to 1 (Rectangle)
-    double BottomLeft_X = 0, BottomLeft_Y = 0.0;
-    double TopRight_X = 0, TopRight_Y = 0;
+    double BottomLeft_X = 0.0, BottomLeft_Y = 0.0;
+    double TopRight_X = 0.0, TopRight_Y = 0.0;
 
-    // Read Inputs from file
+    // Read Inputs from file (File generated from WPF-Application)
 #pragma region ReadInputsFromFile
     string strFilename = "CreateGeometryInput";
     ifstream inputfile(PATHTOOPEN(strFilename));
