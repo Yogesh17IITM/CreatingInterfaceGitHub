@@ -9,6 +9,6 @@
 class IMPLEMENTATIONDLLEXPORT ImplCalculatePosition : public CalculatePosition
 {
 public:
-	virtual bool CalculateCurrentPosition(vector<Particle*>& oListOfParticles, const GridParams & iGridParams, const GeometricParams2D & iGeometricParams2D, const Position* ipStartPosition = NULL) override;
+	virtual bool CalculateCurrentPosition(vector<Particle*>& ioListOfParticles, const GeometricParams2D & iGeometricParams2D, const Position* ipStartPosition = NULL) override;
 };
 
