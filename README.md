@@ -4,16 +4,18 @@ This project is to demonstrate Fluid Dynamics simulation using C++.
 # Pre-requistite(s):
 1) Computational Fluid Dynamics (Advanced Mechanical Engineering)
 2) Linear Algebra, ODEs and PDEs, Numerical Integration 
-3) C++ programming
+3) C++ Applicative programming (OOPS Concepts)
 4) Data structure and Algorithms
 
 # Tools Required
 1) Visual Studio For C++ (For Code Creation, Edition, and to Compile and Build)
 2) GitHub Extension for Visual Studio (For Source Code Management (SCM))
+3) Paraview for visualization
 
 # Technology Used:
 1) C++ 
 2) Microsoft - Component Object Modeling (COM)
+3) CFD Discretization
 
 To Build:
 ----------------
@@ -25,8 +27,9 @@ To Build:
 
 # Initial State:
 ![Density](Output/Density.JPG "Initial Condition Screenshot")
-A rectangular domain (or a tank) of size 2 x 1 meters containing a total of 1001 x 1001 particles.
-Particles are initially distinct into two different regimes representing air (on the left) and water (on the right) respectively.
+A rectangular domain (or a tank) of size 3 x 2 meters containing a total of 300 x  200 particles.
+Particles are initially distinct into two different regimes representing water (on the left-bottom) with density 1000 kg/m^3 
+and air (on the remaining space) with 1/1000 th of density of water respectively.
 
 # Reference(s)
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
