@@ -1,5 +1,10 @@
 # Creating C++ Interfaces for Fluid Dynamics Simulation
-This project is to demonstrate Fluid Dynamics simulation using C++. 
+This project is to demonstrate how to create Geometry using C++ APIs. 
+
+#Important:
+This code is developed purely with self-interest and not copied from any source.
+Also, this code is targeted for people who are willing to learn how to create simple geometries for doing simple fluid simulations.
+It is NOT recommended to re-use of any part of the code without author's knowledge and author is not responsible for any bug(s).
 
 # Pre-requistite(s):
 1) Computational Fluid Dynamics (Advanced Mechanical Engineering)
@@ -33,6 +38,7 @@ and air (on the remaining space) with 1/1000 th of density of water respectively
 
 # Reference(s)
 1) For C++, VS, COM: https://docs.microsoft.com/en-in/
+2) NPTEL - IIT Lectures
 
 # Author(s)
 Yogeshwaran
