@@ -18,7 +18,7 @@ class Position;
 class INTERFACEDLLEXPORT CalculatePosition : public ImplMaster
 {
 public:
-	virtual bool CalculateCurrentPosition(vector<Particle*>& oListOfParticles, const GridParams & iGridParams, const GeometricParams2D & iGeometricParams2D, const Position * ipStartPosition = NULL) = 0;	
+	virtual bool CalculateCurrentPosition(vector<Particle*>& ioListOfParticles, const GeometricParams2D & iGeometricParams2D, const Position * ipStartPosition = NULL) = 0;	
 
 	// TODO: Create function for calculating updated position.	
 };

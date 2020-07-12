@@ -3,6 +3,7 @@
 // Std libraries
 #include<iostream>
 #include<fstream>
+#include <iomanip> 
 
 // Interfaces
 #include "Particle.h"
@@ -54,7 +55,7 @@ bool WriteToFile(const vector<Particle*>& iListOfParticles, const string& iNameO
 			pParticle->GetDensity(density);
 
 			// TODO: Print other properties such as mass, velocity, etc
-			file << pPosition->GetX() << "," << pPosition->GetY() << "," << density << endl;
+			file << fixed << std::setprecision(3)<< pPosition->GetX() << "," << pPosition->GetY() << "," << density << endl;
 		}
 		file.close();
 	}

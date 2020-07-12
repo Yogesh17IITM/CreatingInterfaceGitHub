@@ -1,10 +1,11 @@
 #include "ImplCalculatePosition.h"
 
-#include "Params.h"
 #include "ImplPosition.h"
 #include "Particle.h"
+#include "Params.h"
+#include "Utilities.h"
 
-bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfParticles, const GridParams & iGridParams, const GeometricParams2D & iGeometricParams2D, const Position* ipStartPosition)
+bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& ioListOfParticles, const GeometricParams2D & iGeometricParams2D, const Position* ipStartPosition)
 {
 	bool oRc = false;
 
@@ -15,41 +16,36 @@ bool ImplCalculatePosition::CalculateCurrentPosition(vector<Particle*>& oListOfP
 	{
 		Start_X = ipStartPosition->GetX();	// To extend in X-Direction
 		Start_Y = ipStartPosition->GetY();	// To extend in Y-Direction
-	}
-
-	int iCurrParticle = 0;
-	for (int iIdx = 0; iIdx < iGridParams.NX; iIdx++)
+	}	
+	
+	int nParticles = (iGeometricParams2D.GridParams.NX * iGeometricParams2D.GridParams.NY);
+	if (ioListOfParticles.size() == nParticles)
 	{
-		for (int jIdx = 0; jIdx < iGridParams.NY; jIdx++)
+		int iCurrParticle = 0;
+		for (int iIdx = 0; iIdx < iGeometricParams2D.GridParams.NX; iIdx++)
 		{
-			// Get current particle pointer and update its position
-			Particle* pCurrentParticle = NULL;
-			pCurrentParticle = oListOfParticles[iCurrParticle];
-
-			if (pCurrentParticle)
+			for (int jIdx = 0; jIdx < iGeometricParams2D.GridParams.NY; jIdx++)
 			{
-				pCurrentParticle->AddRef();
-				Position* pPosOfCurrParticle = new ImplPosition();	// TODO: Instantiate using FactoryDLL
-				if (pPosOfCurrParticle)
-				{
-					// Assuming cartesian Coordinate system [2D]
-					pPosOfCurrParticle->SetX(Start_X + (iIdx * iGridParams.dx * iGeometricParams2D.Rec.Length));	// Set 'X' Coordinate
-					pPosOfCurrParticle->SetY(Start_Y + (jIdx * iGridParams.dy * iGeometricParams2D.Rec.Height));	// Set 'Y' Coordinate 
-					pCurrentParticle->SetPosition(pPosOfCurrParticle);	// TODO: Copy obj if required. Manage lifecycle of pPosOfCurrParticle.
-					pPosOfCurrParticle->AddRef();
-				}
-				pPosOfCurrParticle->Release();	
-				iCurrParticle++;
-			}
-			pCurrentParticle->Release();
-		}
-	}
+				// Get current particle pointer and update its position
+				SmartPtr<Particle> spCurrentParticle;
+				spCurrentParticle = ioListOfParticles[iCurrParticle];
 
-	int nTotalParticles = (iGridParams.NX * iGridParams.NY); 
-	if (oListOfParticles.size() == nTotalParticles)
-	{
+				if (spCurrentParticle)
+				{
+					Position* pPosOfCurrParticle = new ImplPosition();	// TODO: Instantiate using FactoryDLL
+					if (pPosOfCurrParticle)
+					{
+						// Compute and Set Coordinates (assuming cartesian Coordinate system [2D])
+						pPosOfCurrParticle->SetX(Start_X + (iIdx * iGeometricParams2D.GridParams.dx));
+						pPosOfCurrParticle->SetY(Start_Y + (jIdx * iGeometricParams2D.GridParams.dy));
+						spCurrentParticle->SetPosition(pPosOfCurrParticle);
+					}
+					iCurrParticle++;
+				}
+			}
+		}
 		oRc = true;
 	}
-
+		
 	return oRc;
 }
