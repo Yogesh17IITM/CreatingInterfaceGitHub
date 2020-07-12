@@ -44,22 +44,24 @@ int main()
     GeometricParams2D GeoParam2D;
     bRc = GetDataFor2DGeometry(GeoParam2D);
     
-    // 4. Initial position of particles (at time, t = 0)
-#pragma region InitialPosition    
+    // 2. Initial position of particles (at time, t = 0)
     CalculatePosition* pCalcPosition = NULL;
     bRc = CreateInstance((void**)&pCalcPosition, INTERFACE_ID::IID_CalculatePosition);
     if (bRc && pCalcPosition)
     {    
-        // Calculating Position for Particles
+        // 2.1 Calculating Position for Particles
 
         // Region #1 - Bottom Left (Water)
+#pragma region Region_1
         vector<Particle*> ListOfWaterParticles;    
         int NWaterParticles = (GeoParam2D.GridParams.NX * GeoParam2D.GridParams.NX);
         bRc = CreateMultipleParticleInstances(ListOfWaterParticles, NWaterParticles, INTERFACE_ID::IID_WaterParticle);
         if(bRc)
             bRc = pCalcPosition->CalculateCurrentPosition(ListOfWaterParticles, GeoParam2D);
+#pragma endregion Region_1
 
         // Region #2 - Bottom Right (Air)
+#pragma region Region_2
         vector<Particle*> ListOfAirParticlesBottom;       // Air Particles
         if (bRc)
         {
@@ -100,8 +102,10 @@ int main()
                 pStartPosition->Release();
             }
         }
+#pragma endregion Region_2
 
-        // Region #3 - Top Region
+        // Region #3 - Top Region (Air)
+#pragma region Region_3
         vector<Particle*> ListOfAirParticlesTop;       // Air Particles
         if (bRc)
         {
@@ -142,6 +146,7 @@ int main()
                 pStartPosition->Release();
             }
         }
+#pragma endregion Region_3
 
         
         // Merge Overall Particles List
@@ -151,13 +156,12 @@ int main()
 
         pCalcPosition->Release();
     }
-#pragma endregion
 
     // TODO: Create Boundary Particles using ParticleCreation algo.
 
     // TODO: Function to Set properties	
 
-    // Writing Initial state of Particle(s) into .csv file (User can view it using "Paraview" application)
+    // 3. Writing Initial state of Particle(s) into .csv file (User can view it using "Paraview" application)
 #pragma region WritingInitialStateToaFile
     if (bRc)
     {        
