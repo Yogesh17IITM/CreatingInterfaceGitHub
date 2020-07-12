@@ -1,7 +1,7 @@
 # Creating C++ Interfaces for Fluid Dynamics Simulation
 This project is to demonstrate how to create Geometry using C++ APIs. 
 
-#Important:
+# Important:
 This code is developed purely with self-interest and not copied from any source.
 Also, this code is targeted for people who are willing to learn how to create simple geometries for doing simple fluid simulations.
 It is NOT recommended to re-use of any part of the code without author's knowledge and author is not responsible for any bug(s).
